@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var https = require("https");
+var path = require("path");
+var fs = require("fs");
+var models = require("../models");
+var browserify = require('browserify');
+
+models.sequelize.sync({ force: true }).then(function () {
+    console.log("DB was synced with models successfully.\n");
+
+    console.log('Loading Jeopardy questions...');
+    console.log('Big thanks to Corpora project! https://github.com/dariusk/corpora');
+    https.get('https://raw.githubusercontent.com/dariusk/corpora/master/data/games/jeopardy_questions.json', function(res) {
+        var body = '';
+
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+
+        res.on('end', function() {
+            var response = JSON.parse(body);
+
+            console.log('Got response with %d samples. Generate data...', response.questions.length);
+            models.addQuestions(response.questions).then(function () {
+                console.log('Database was initialized successfully!');
+            }, function (err) {
+                console.log("Got error: ", err);
+            });
+        });
+    }).on('error', function(e) {
+          console.log("Got error: ", e);
+    });
+});
+
+var bundleFile = path.join(__dirname, '..', 'public', 'js', 'catalog.js');
+browserify(path.join(__dirname, '..', 'catalog.js'))
+    .bundle()
+    .on('end', function () {
+        console.log('Build of bundle JS files succeeded!');
+    })
+    .on('error', console.error)
+    .pipe(fs.createWriteStream(bundleFile, 'utf8'));

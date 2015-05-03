@@ -1,0 +1,23 @@
+{
+    "development": {
+        "host": "127.0.0.1",
+        "port": 9090,
+        "dialect": "sqlite",
+        "storage": "./data/db.development.sqlite",
+        "logging": true
+    },
+    "test": {
+        "host": "127.0.0.1",
+        "port": 9090,
+        "dialect": "sqlite",
+        "storage": "./data/db.test.sqlite",
+        "logging": false
+    },
+    "production": {
+        "host": "127.0.0.1",
+        "port": 9090,
+        "dialect": "sqlite",
+        "storage": "./data/db.production.sqlite",
+        "logging": false
+    }
+}

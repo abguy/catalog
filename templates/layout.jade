@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    block head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      h1=title
+    section
+      block content
+    block templates

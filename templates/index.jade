@@ -1,0 +1,42 @@
+extends layout
+
+block head
+    script(type='text/javascript', src!="/js/catalog.js")
+    script(type='text/javascript', src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js")
+
+block content
+    div(class="row")
+        div(id="products", class="col-md-8", role="main")
+            h2 Welcome to #{title}!
+            div(id="productsContainer")
+        div(class="col-md-1")
+        div(id="categories", class="col-md-3", role="complementary")
+            h2 Choose Category
+            div(id="categoriesContainer")
+
+block templates
+    script(type='text/template', id="categoryTemplate")
+        a(href="#")
+            |<%- name %>
+
+    script(type='text/template', id="productTemplate")
+        div(class="thumbnail")
+            img(src!="<%- image %>", width="120px", height="90px")
+            div(class="caption")
+                h3 Price: <%- '$' + (price / 100).toFixed(2) %>
+                p <%- name %>
+                p
+                    a(href="#", class="btn btn-primary", role="button") Show The Answer
+                h4(class="hidden") <%- answer %>
+
+    script(type='text/template', id="pageTemplate")
+        |<% if (isAria) { %>
+        a(href="#", aria-label!="<%- label %>")
+            span(aria-hidden="true") <%= name %>
+        |<% } else { %>
+        a(href="#")
+            |<%= name %>
+            |<% if (isCurrent) { %>
+            span(class="sr-only") (current)
+            |<% } %>
+        |<% } %>
