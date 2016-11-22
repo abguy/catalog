@@ -4,6 +4,10 @@ Welcome to the Products catalog project!
 
 It is my experiment with [Flux application architecture](https://facebook.github.io/flux/).
 
+**Warning!**
+Please note that this project was implemented in early 2015. It is outdated. 
+JS world changed significantly since that time.
+
 ## Other goals
 
 * Try [HTML5 pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history);
