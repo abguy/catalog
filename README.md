@@ -23,7 +23,7 @@ Please build a small Node.js application, that shows a shop page displaying prod
 
 # Results
 
-You can find the results at [project site](http://abelyaev.net/). Direct link to [online demo](http://catalog.abelyaev.net/).
+You can find the results at [online demo](http://23.236.50.55:9090/).
 
 # How to setup
 
